@@ -215,8 +215,10 @@
       let firstNum = document.querySelector('#first-num').value;
       let secondNum = document.querySelector('#second-num').value;
       if(firstNum == '' || secondNum == '') {
+        console.log('an error was triggered');
         throw new EmptyError('Must input 2 numbers');
       }else{
+        console.log('an error was triggered');
         throw new EmptyError('test error, not empty');
       }
       try {
