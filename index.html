@@ -86,16 +86,29 @@
       <button>Trigger a Global Error</button>
     </section>
   </main>
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "3d438e7ba54049f7958d4281be7bece8"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+  </script>
 
   <script>
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
       e.preventDefault();
-      let output = document.querySelector('output');
-      let firstNum = document.querySelector('#first-num').value;
-      let secondNum = document.querySelector('#second-num').value;
-      let operator = document.querySelector('#operator').value;
-      output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+      try {
+        let output = document.querySelector('output');
+        let firstNum = document.querySelector('#first-num').value;
+        let secondNum = document.querySelector('#second-num').value;
+        let operator = document.querySelector('#operator').value;
+        output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+        console.log('no error');
+      } catch (err) {
+        console.log("Invalid data: " + err.message);
+        throw err; // unknown error, rethrow it (**)
+      } 
     });
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
@@ -181,10 +194,49 @@
       const fourth = () => { console.trace(); };
       first();
     });
+
+    class EmptyError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = "EmptyError";
+      }
+    }
+
+    function inputBothNumbers() {
+      let firstNum = document.querySelector('#first-num').value;
+      let secondNum = document.querySelector('#second-num').value;
+      if(firstNum == '' || secondNum == '') {
+          throw new EmptyError('Must input 2 numbers');
+      }
+    }
+    
     let triggerButton = document.querySelectorAll('button')[15];
     triggerButton.addEventListener('click', () => {
-      console.log('hello15');
+      let firstNum = document.querySelector('#first-num').value;
+      let secondNum = document.querySelector('#second-num').value;
+      if(firstNum == '' || secondNum == '') {
+        throw new EmptyError('Must input 2 numbers');
+      }else{
+        throw new EmptyError('test error, not empty');
+      }
+      try {
+        inputBothNumbers();
+        console.log('no error');
+      } catch (err) {
+        if (err instanceof EmptyError) {
+          console.error("Invalid data: " + err.message);
+        }
+        else {
+          throw err; // unknown error, rethrow it (**)
+          console.error("Invalid data: " + err.message);
+        }
+      } finally {
+        console.log( 'finally' );
+      }
     });
+
+    TrackJS.track('Testing TrackJS!');
+    
   </script>
 </body>
 
