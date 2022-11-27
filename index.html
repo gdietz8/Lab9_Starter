@@ -102,6 +102,89 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+     
+    
+    let consoleLogButton = document.querySelectorAll('button')[1];
+    consoleLogButton.addEventListener('click', () => {
+      console.log('console.log test');
+    });
+    let consoleErrorButton = document.querySelectorAll('button')[2];
+    consoleErrorButton.addEventListener('click', () => {
+      console.error('console.error test');
+    });
+    let consoleCountButton = document.querySelectorAll('button')[3];
+    consoleCountButton.addEventListener('click', () => {
+      console.count('count test');
+    });
+    let consoleWarnButton = document.querySelectorAll('button')[4];
+    consoleWarnButton.addEventListener('click', () => {
+      console.warn('console.warn test');
+    });
+    let consoleAssertButton = document.querySelectorAll('button')[5];
+    consoleAssertButton.addEventListener('click', () => {
+      const x = 5;
+      const y = 3;
+      const reason = 'x is expected to be less than y';
+      console.assert(x < y, {x, y, reason});
+    });
+    let consoleClearButton = document.querySelectorAll('button')[6];
+    consoleClearButton.addEventListener('click', () => {
+      console.clear();
+    });
+    let consoleDirButton = document.querySelectorAll('button')[7];
+    consoleDirButton.addEventListener('click', () => {
+      console.dir(consoleDirButton);
+    });
+    let consoledirxmlButton = document.querySelectorAll('button')[8];
+    consoledirxmlButton.addEventListener('click', () => {
+      console.dirxml(consoledirxmlButton);
+    });
+    let consoleGroupStartButton = document.querySelectorAll('button')[9];
+    consoleGroupStartButton.addEventListener('click', () => {
+      console.group('console.group test');
+    });
+    let consoleGroupEndButton = document.querySelectorAll('button')[10];
+    consoleGroupEndButton.addEventListener('click', () => {
+      console.groupEnd();
+    });
+    let consoleTableButton = document.querySelectorAll('button')[11];
+    consoleTableButton.addEventListener('click', () => {
+      var tableTest = [
+        {
+          test: 'test 1',
+          successful: 'yes',
+        },
+        {
+          test: 'test 2',
+          successful: 'yes',
+        },
+        {
+          test: 'test 3',
+          successful: 'yes',
+        }
+      ];
+      console.table(tableTest);
+    });
+    let startTimerButton = document.querySelectorAll('button')[12];
+    startTimerButton.addEventListener('click', () => {
+      console.time('time test');
+    });
+    let endTimerButton = document.querySelectorAll('button')[13];
+    endTimerButton.addEventListener('click', () => {
+      console.timeEnd('time test');
+    });
+    let consoleTraceButton = document.querySelectorAll('button')[14];
+    consoleTraceButton.addEventListener('click', () => {
+      const first = () => { second(); };
+      const second = () => { third(); };
+      const third = () => { fourth(); };
+      const fourth = () => { console.trace(); };
+      first();
+    });
+    let triggerButton = document.querySelectorAll('button')[15];
+    triggerButton.addEventListener('click', () => {
+      console.log('hello15');
+    });
   </script>
 </body>
 
